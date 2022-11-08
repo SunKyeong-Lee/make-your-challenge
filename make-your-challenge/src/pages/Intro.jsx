@@ -1,0 +1,56 @@
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+
+const Wrap = styled.div`
+  ${"h1"} {
+    font-family: "yg-jalnan";
+  }
+  ${"p"} {
+    color: #9e9e9e;
+    margin-bottom: 20px;
+  }
+`;
+const Button = styled.button`
+  width: 130px;
+  height: 130px;
+  margin: auto;
+  border: none;
+  border-radius: 50%;
+  background-color: #f6f1eb;
+  color: #9e9e9e;
+  font-family: "yg-jalnan";
+  font-size: 18px;
+  font-family: "yg-jalnan";
+  transition: all 0.35s cubic-bezier(0.39, 0.5, 0.15, 1.36);
+  box-shadow: #f6f1eb 0 0px 0px 2px inset;
+  &:hover {
+    color: #011126;
+    font-weight: bold;
+    box-shadow: #fcbda3 0 130px 0px 2px inset;
+  }
+  &:active {
+    box-shadow: #f0884e 0 130px 0px 2px inset;
+  }
+`;
+
+const Intro = () => {
+  const navigator = useNavigate();
+
+  return (
+    <Wrap>
+      <div className="wrap">
+        <h1>Make Your Challenge!</h1>
+        <p>목표를 설정하고 30일간 꾸준히 실천해보세요!</p>
+        <Button
+          onClick={() => {
+            navigator("/login");
+          }}
+        >
+          Start
+        </Button>
+      </div>
+    </Wrap>
+  );
+};
+
+export default Intro;
