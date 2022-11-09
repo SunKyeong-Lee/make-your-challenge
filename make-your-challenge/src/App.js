@@ -6,10 +6,6 @@ import Intro from "./pages/Intro";
 import Login from './pages/Login';
 import Layout from "./pages/Layout";
 import ChallengeDetail from "./pages/ChallengeDetail";
-import StampBoard from './components/StampBoard';
-import Diary from './components/Diary';
-import Memo from './components/Memo';
-import ChallengeLayout from './pages/ChallengeLayout';
 
 function App() {
   return (
@@ -18,8 +14,7 @@ function App() {
         <Route path="/" element={<Intro />} />
         <Route path="login" element={<Login />} />
         <Route path="main" element={<Layout />}>
-          <Route index element={<ChallengeDetail />} />
-          <Route path=':id' element={<ChallengeLayout />} />
+          <Route path=':id' element={<ChallengeDetail />} />
         </Route>
       </Routes>
     </DataProvider>
