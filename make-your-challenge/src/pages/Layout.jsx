@@ -1,27 +1,25 @@
 import styled from "styled-components";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
+import { useContext, useEffect } from "react";
+import DataContext from "../context/DataContext";
 
 const Wrap = styled.div`
   display: grid;
-  grid-template-columns: minmax(auto, 240px) 1fr;
+  grid-template-columns: minmax(30px, 240px) 1fr;
 `;
 
 const Layout = () => {
-  // // 로그인하자마자 params 목록 중 제일 처음것을 보이게 하기 위함
-  // const navigator = useNavigate();
+  const { state } = useContext(DataContext);
+  const navigator = useNavigate();
 
-  // // 임시 > 챌린지 리스트의 각 챌린지 제목 들고오기
-  // const [memolist, setMemolist] = useState([
-  //   { id: 1, title: "밥먹기", memo: "첫번째 내용입니다" },
-  //   { id: 2, title: "운동하기", memo: "두번째 내용입니다" },
-  //   { id: 3, title: "식사하기", memo: "세번째 내용입니다" },
-  // ]);
+  useEffect(() => {
+    const item = state.user.challengeList.filter(
+      (item) => item.challengeState === 1
+    );
+    navigator("/main/" + item[0].challengeId);
+  }, []);
 
-  // useEffect(() => {
-  //   navigator("/main/" + memolist[0].title);
-  // }, []);
-  
   return (
     <Wrap>
       <Sidebar />

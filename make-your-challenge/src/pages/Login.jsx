@@ -7,14 +7,20 @@ const Wrap = styled.div`
   width: 320px;
   margin: auto;
   font-size: 18px;
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
   ${"p"} {
     margin: 0;
+    margin-bottom: 1.5rem;
     font-weight: bolder;
   }
 `;
 const MyButton = styled.button`
   display: block;
   width: 100%;
+  margin-top: 1.5rem;
   background-color: #f6f1eb;
   color: #9e9e9e;
   box-shadow: #f6f1eb 0 0px 0px 2px inset;
@@ -30,9 +36,10 @@ const MyButton = styled.button`
   }
 `;
 const Notice = styled.div`
+  display: ${(props) => (props.login? "none" : "block")};
   font-size: 13px;
   color: #f0884e;
-`
+`;
 
 function Login() {
   const { state, action } = useContext(DataContext);
@@ -56,36 +63,30 @@ function Login() {
 
   return (
     <Wrap>
-      <div className="wrap">
-        <form onSubmit={loginUser}>
-          <p className="mb-4">로그인</p>
-          <input
-            className="mb-3"
-            type="text"
-            placeholder="아이디"
-            onChange={(e) => {
-              setId(e.target.value);
-            }}
-            required
-          />
-          <input
-            className="mb-3"
-            type="password"
-            placeholder="비밀번호"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            required
-          />
-          <Notice className={login && "hidden"}>
-            아이디 또는 비밀번호를 잘못 입력했어요! <br />
-            다시 확인해주세요!
-          </Notice>
-          <MyButton className="mt-4" type="submit">
-            확인
-          </MyButton>
-        </form>
-      </div>
+      <form onSubmit={loginUser}>
+        <p>로그인</p>
+        <input
+          type="text"
+          placeholder="아이디"
+          onChange={(e) => {
+            setId(e.target.value);
+          }}
+          required
+        />
+        <input
+          type="password"
+          placeholder="비밀번호"
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+          required
+        />
+        <Notice login={login}>
+          아이디 또는 비밀번호를 잘못 입력했어요! <br />
+          다시 확인해주세요!
+        </Notice>
+        <MyButton type="submit">확인</MyButton>
+      </form>
     </Wrap>
   );
 }

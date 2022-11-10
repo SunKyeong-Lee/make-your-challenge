@@ -1,11 +1,11 @@
 const Memo = (props) => {
-  // const { memo } = props;
-  // console.log(memo);
+  const { challengeItem } = props;
   
 
   return (
     <div>
       <h1>메모</h1>
+      <p>{challengeItem.title}</p>
     </div>
   );
 };

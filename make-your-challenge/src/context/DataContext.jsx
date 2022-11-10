@@ -51,6 +51,7 @@ const DataProvider = ({ children }) => {
           diary: [],
         },
       ],
+      challengeCount: 3,
     },
     {
       userId: "edf123",
@@ -58,6 +59,7 @@ const DataProvider = ({ children }) => {
       nickname: "성춘향",
       profile: null,
       challengeList: [],
+      challengeCount: 0,
     },
   ]);
 

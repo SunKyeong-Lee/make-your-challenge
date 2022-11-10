@@ -2,6 +2,12 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 const Wrap = styled.div`
+  ${"div"} {
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+    text-align: center;
+  }
   ${"h1"} {
     font-family: "yg-jalnan";
   }
@@ -38,14 +44,10 @@ const Intro = () => {
 
   return (
     <Wrap>
-      <div className="wrap">
+      <div>
         <h1>Make Your Challenge!</h1>
         <p>목표를 설정하고 30일간 꾸준히 실천해보세요!</p>
-        <Button
-          onClick={() => {
-            navigator("/login");
-          }}
-        >
+        <Button onClick={() => {navigator("/login");}}>
           Start
         </Button>
       </div>
