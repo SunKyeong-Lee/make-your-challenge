@@ -7,19 +7,24 @@ import { NavLink } from "react-router-dom";
 import DataContext from "../context/DataContext";
 
 const MyStyle = styled.div`
-  border-top: 1px solid #bebebe;
+  ${"hr"} {
+    width: 280px;
+    transform: translateX(-2rem);
+    opacity: 0.1;
+  }
   ${"h2"} {
     display: flex;
     width: 100%;
     padding: 0.3rem 0;
-    margin-top: 3rem;
+    margin-top: 2.5rem;
     margin-bottom: 0;
     font-size: 16px;
     font-weight: bold;
   }
   ${"a"} {
     display: block;
-    padding: 0.3rem 1.5rem;
+    padding: 0.3rem 2rem;
+    margin-bottom: 0.1rem;
     color: rgb(68, 70, 73);
     text-decoration: none;
     transition: all 0.35s;
@@ -53,6 +58,7 @@ const ChallengeList = () => {
 
   return (
     <MyStyle>
+      <hr />
       <h2>
         <span>진행중인 챌린지</span>
         <MySpan

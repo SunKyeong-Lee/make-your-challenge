@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import styled from "styled-components";
 
 const MyContainer = styled(Container)`
-  padding: 30px 20px;
+  padding: 2.5rem 3rem;
   .date {
     margin-bottom: 3rem;
     ${"div"} {
@@ -18,37 +18,28 @@ const MyContainer = styled(Container)`
     font-size: 20px;
     font-weight: bold;
   }
-  ${"label"} {
-    width: 3rem;
-    height: 3rem;
+`;
+const Board = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  ${"div"} {
+    width: 48px;
+    height: 48px;
+    background-color: #e0e0e0;
     border-radius: 50%;
-    background-color: #bebebe;
-    cursor: pointer;
-  }
-  ${"input[type=radio]"}:checked {
-    ${"label"} {
-      background-color: tomato;
-    }
+    color: #f6f1eb;
   }
 `;
 
 const StampBoard = (props) => {
-  const { challengeItem } = props;
-  // console.log(challengeItem);
+  const { challengeItem } = props; // challengeList: {...}
+  const stampBoard = [];
+  for (let i = 0; i < 30; i++) {
+    stampBoard.push(i);
+  }
 
   // 테스트
-  const [test, setTest] = useState([
-    {state: true, color: "tomato"},
-    {state: true, color: "yellowgreen"},
-    {state: false, color: "cornflowerblue"},
-    {state: false, color: ""},
-    {state: false, color: ""},
-  ]);
-  const color = ["tomato", "yellowgreen", "cornflowerblue"];
-
-  const check = (e) => {
-    console.log(e.target.checked);
-  };
 
   return (
     <MyContainer>
@@ -57,23 +48,13 @@ const StampBoard = (props) => {
         <div>0000.00.00</div>
       </div>
       <h2>{challengeItem.title}</h2>
-      <div className="stamp-board">
-
-        {/* 테스트 */}
-        {test.map((n, index) => (
-          <label htmlFor={"cb" + index} key={index}>
-            {index + 1}
-            <input
-              type="checkbox"
-              id={"cb" + index}
-              checked={n.state}
-              readOnly
-              onClick={check}
-            />
-          </label>
+      <Board>
+        {stampBoard.map((n, index) => (
+          <div key={index} n={n+1}>
+            {n + 1}
+          </div>
         ))}
-
-      </div>
+      </Board>
     </MyContainer>
   );
 };

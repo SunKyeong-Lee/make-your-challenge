@@ -6,7 +6,7 @@ import DataContext from "../context/DataContext";
 
 const Wrap = styled.div`
   display: grid;
-  grid-template-columns: minmax(30px, 240px) 1fr;
+  grid-template-columns: 280px 1fr;
 `;
 
 const Layout = () => {
