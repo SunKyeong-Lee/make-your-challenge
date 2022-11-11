@@ -6,10 +6,10 @@ import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import DataContext from "../context/DataContext";
 
-const MyStyle = styled.div`
+const Wrap = styled.div`
   ${"hr"} {
     width: 280px;
-    transform: translateX(-2rem);
+    transform: translateX(-2.5rem);
     opacity: 0.1;
   }
   ${"h2"} {
@@ -45,7 +45,7 @@ const MyStyle = styled.div`
     font-weight: bold;
   }
 `;
-const MySpan = styled.span`
+const IconStyle = styled.span`
   cursor: pointer;
   margin-left: auto;
   transition: transform 0.35s;
@@ -57,18 +57,18 @@ const ChallengeList = () => {
   const [open, setOpen] = useState([true, true]);
 
   return (
-    <MyStyle>
+    <Wrap>
       <hr />
       <h2>
         <span>진행중인 챌린지</span>
-        <MySpan
+        <IconStyle
           open={open[0]}
           onClick={() => setOpen([!open[0], open[1]])}
           aria-controls="collapse-text1"
           aria-expanded={open[0]}
         >
           <FontAwesomeIcon icon={faChevronDown} />
-        </MySpan>
+        </IconStyle>
       </h2>
       <Collapse in={open[0]}>
         <div id="collapse-text1">
@@ -85,14 +85,14 @@ const ChallengeList = () => {
 
       <h2>
         <span>완료한 챌린지</span>
-        <MySpan
+        <IconStyle
           open={open[1]}
           onClick={() => setOpen([open[0], !open[1]])}
           aria-controls="collapse-text2"
           aria-expanded={open[1]}
         >
           <FontAwesomeIcon icon={faChevronDown} />
-        </MySpan>
+        </IconStyle>
       </h2>
       <Collapse in={open[1]}>
         <div id="collapse-text2">
@@ -106,7 +106,7 @@ const ChallengeList = () => {
           )}
         </div>
       </Collapse>
-    </MyStyle>
+    </Wrap>
   );
 };
 

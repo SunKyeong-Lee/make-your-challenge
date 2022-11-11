@@ -5,7 +5,7 @@ import Profile from "./Profile";
 
 const Wrap = styled(Stack)`
   height: 100vh;
-  padding: 2.5rem 2rem;
+  padding: 3.5rem 2.5rem;
   background-color: #f6f1eb;
   text-align: left;
 `;

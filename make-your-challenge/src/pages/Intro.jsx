@@ -9,7 +9,7 @@ const Wrap = styled.div`
     text-align: center;
   }
   ${"h1"} {
-    font-family: 'KOTRAHOPE';
+    font-family: "BMJUA";
     font-size: 3rem;
   }
   ${"p"} {
@@ -25,7 +25,7 @@ const Button = styled.button`
   border-radius: 50%;
   background-color: #f6f1eb;
   color: #9e9e9e;
-  font-family: 'KOTRAHOPE';
+  font-family: "BMJUA";
   font-size: 1.5rem;
   transition: all 0.35s cubic-bezier(0.39, 0.5, 0.15, 1.36);
   box-shadow: #f6f1eb 0 0px 0px 2px inset;

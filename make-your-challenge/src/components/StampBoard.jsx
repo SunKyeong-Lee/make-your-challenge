@@ -5,13 +5,12 @@ import DataContext from "../context/DataContext";
 import StampSelect from "./StampSelect";
 
 const MyContainer = styled(Container)`
-  padding: 2.5rem 3.5rem;
+  padding: 3.5rem 4rem;
   .date {
     margin-bottom: 3rem;
     ${"div"} {
       font-size: 23px;
-      font-weight: bold;
-      font-family: "KOTRAHOPE";
+      font-family: "BMJUA";
     }
   }
   ${"h2"} {
@@ -47,7 +46,7 @@ const Empty = styled.div`
   color: #fcfcfc;
   position: absolute;
   background-color: #e0e0e0;
-  font-family: "KOTRAHOPE";
+  font-family: "BMJUA";
 `;
 const Stamp = styled.div`
   position: absolute;

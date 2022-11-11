@@ -21,14 +21,15 @@ const MyButton = styled.button`
   display: block;
   width: 100%;
   margin-top: 1.5rem;
-  background-color: #f6f1eb;
   color: #9e9e9e;
+  background-color: #f6f1eb;
   box-shadow: #f6f1eb 0 0px 0px 2px inset;
-  &:hover {
-    color: #011126;
+  &:hover, &:focus {
     font-weight: bold;
+    color: #011126;
     background-color: #f6f1eb;
     box-shadow: #fcbda3 0 50px 0px 2px inset;
+    outline: none;
   }
   &:active {
     background-color: #fcbda3;

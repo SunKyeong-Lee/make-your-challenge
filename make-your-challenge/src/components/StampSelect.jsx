@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const ActiveStamp = styled.div`
   color: #011126;
-  font-family: "KOTRAHOPE";
+  font-family: "BMJUA";
   cursor: pointer;
 `;
 const Board = styled.div`
@@ -14,6 +14,7 @@ const Board = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-auto-rows: auto;
+  justify-items: center;
   margin: auto;
   ${"div"} {
     display: flex;
