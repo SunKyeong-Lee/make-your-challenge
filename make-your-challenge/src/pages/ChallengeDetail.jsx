@@ -10,7 +10,7 @@ import StampBoard from "../components/StampBoard";
 
 const Wrap = styled.div`
   display: grid;
-  grid-template-columns: 55% 45%;
+  grid-template-columns: 420px 1fr;
 `;
 const TabWrap = styled.div`
   padding: 30px 20px;

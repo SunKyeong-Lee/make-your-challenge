@@ -9,7 +9,8 @@ const Wrap = styled.div`
     text-align: center;
   }
   ${"h1"} {
-    font-family: "yg-jalnan";
+    font-family: 'KOTRAHOPE';
+    font-size: 3rem;
   }
   ${"p"} {
     color: #9e9e9e;
@@ -24,9 +25,8 @@ const Button = styled.button`
   border-radius: 50%;
   background-color: #f6f1eb;
   color: #9e9e9e;
-  font-family: "yg-jalnan";
-  font-size: 18px;
-  font-family: "yg-jalnan";
+  font-family: 'KOTRAHOPE';
+  font-size: 1.5rem;
   transition: all 0.35s cubic-bezier(0.39, 0.5, 0.15, 1.36);
   box-shadow: #f6f1eb 0 0px 0px 2px inset;
   &:hover {

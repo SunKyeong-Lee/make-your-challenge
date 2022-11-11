@@ -68,17 +68,13 @@ function Login() {
         <input
           type="text"
           placeholder="아이디"
-          onChange={(e) => {
-            setId(e.target.value);
-          }}
+          onChange={(e) => {setId(e.target.value);}}
           required
         />
         <input
           type="password"
           placeholder="비밀번호"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
+          onChange={(e) => {setPassword(e.target.value);}}
           required
         />
         <Notice login={login}>

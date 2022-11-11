@@ -6,8 +6,8 @@ const Wrap = styled.div`
   display: flex;
 `;
 const ProfileImg = styled.div`
-  width: 48px;
-  height: 48px;
+  width: 3rem;
+  height: 3rem;
   align-self: center;
   border-radius: 50%;
   background-color: #9e9e9e;
