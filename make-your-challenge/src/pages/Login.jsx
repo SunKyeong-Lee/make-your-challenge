@@ -3,45 +3,6 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DataContext from "../context/DataContext";
 
-const Wrap = styled.div`
-  width: 320px;
-  margin: auto;
-  font-size: 18px;
-  min-height: 100vh;
-  display: grid;
-  place-content: center;
-  text-align: center;
-  ${"p"} {
-    margin: 0;
-    margin-bottom: 1.5rem;
-    font-weight: bolder;
-  }
-`;
-const MyButton = styled.button`
-  display: block;
-  width: 100%;
-  margin-top: 1.5rem;
-  color: #9e9e9e;
-  background-color: #f6f1eb;
-  box-shadow: #f6f1eb 0 0px 0px 2px inset;
-  &:hover, &:focus {
-    font-weight: bold;
-    color: #011126;
-    background-color: #f6f1eb;
-    box-shadow: #fcbda3 0 50px 0px 2px inset;
-    outline: none;
-  }
-  &:active {
-    background-color: #fcbda3;
-    box-shadow: #f0884e 0 50px 0px 2px inset;
-  }
-`;
-const Notice = styled.div`
-  display: ${(props) => (props.login? "none" : "block")};
-  font-size: 13px;
-  color: #f0884e;
-`;
-
 function Login() {
   const { state, action } = useContext(DataContext);
   const [id, setId] = useState("");
@@ -87,5 +48,44 @@ function Login() {
     </Wrap>
   );
 }
+
+const Wrap = styled.div`
+  width: 320px;
+  margin: auto;
+  font-size: 18px;
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  ${"p"} {
+    margin: 0;
+    margin-bottom: 1.5rem;
+    font-weight: bolder;
+  }
+`;
+const MyButton = styled.button`
+  display: block;
+  width: 100%;
+  margin-top: 1.5rem;
+  color: #9e9e9e;
+  background-color: #f6f1eb;
+  box-shadow: #f6f1eb 0 0px 0px 2px inset;
+  &:hover, &:focus {
+    font-weight: bold;
+    color: #011126;
+    background-color: #f6f1eb;
+    box-shadow: #fcbda3 0 50px 0px 2px inset;
+    outline: none;
+  }
+  &:active {
+    background-color: #fcbda3;
+    box-shadow: #f0884e 0 50px 0px 2px inset;
+  }
+`;
+const Notice = styled.div`
+  display: ${(props) => (props.login? "none" : "block")};
+  font-size: 13px;
+  color: #f0884e;
+`;
 
 export default Login;

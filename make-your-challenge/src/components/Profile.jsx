@@ -2,6 +2,20 @@ import { useContext } from "react";
 import styled from "styled-components";
 import DataContext from "../context/DataContext";
 
+const Profile = () => {
+  const { state, action } = useContext(DataContext);
+
+  return (
+    <Wrap>
+      <ProfileImg />
+      <User>
+        <div>user</div>
+        <div>{state.user.nickname}</div>
+      </User>
+    </Wrap>
+  );
+};
+
 const Wrap = styled.div`
   display: flex;
 `;
@@ -24,19 +38,5 @@ const User = styled.div`
     }
   }
 `;
-
-const Profile = () => {
-  const { state, action } = useContext(DataContext);
-
-  return (
-    <Wrap>
-      <ProfileImg />
-      <User>
-        <div>welcome back,</div>
-        <div>{state.user.nickname}</div>
-      </User>
-    </Wrap>
-  );
-};
 
 export default Profile;

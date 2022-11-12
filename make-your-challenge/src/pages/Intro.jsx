@@ -1,6 +1,26 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
+const Intro = () => {
+  const navigator = useNavigate();
+
+  return (
+    <Wrap>
+      <div>
+        <h1>Make Your Challenge!</h1>
+        <p>목표를 설정하고 30일간 꾸준히 실천해보세요!</p>
+        <Button
+          onClick={() => {
+            navigator("/login");
+          }}
+        >
+          Start
+        </Button>
+      </div>
+    </Wrap>
+  );
+};
+
 const Wrap = styled.div`
   ${"div"} {
     min-height: 100vh;
@@ -38,21 +58,5 @@ const Button = styled.button`
     box-shadow: #f0884e 0 130px 0px 2px inset;
   }
 `;
-
-const Intro = () => {
-  const navigator = useNavigate();
-
-  return (
-    <Wrap>
-      <div>
-        <h1>Make Your Challenge!</h1>
-        <p>목표를 설정하고 30일간 꾸준히 실천해보세요!</p>
-        <Button onClick={() => {navigator("/login");}}>
-          Start
-        </Button>
-      </div>
-    </Wrap>
-  );
-};
 
 export default Intro;

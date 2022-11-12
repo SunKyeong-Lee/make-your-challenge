@@ -1,8 +1,42 @@
 import Container from "react-bootstrap/Container";
 import styled from "styled-components";
-import { useContext, useState } from "react";
-import DataContext from "../context/DataContext";
 import StampSelect from "./StampSelect";
+
+const StampBoard = (props) => {
+  const { challengeItem } = props; // challengeList: {...}
+  const emptyBoard = [];
+  for (let i = challengeItem.stamp.length + 1; i < 30; i++) {
+    emptyBoard.push(i);
+  }
+
+  return (
+    <MyContainer>
+      <div className="date">
+        <div>Today,</div>
+        <div>0000.00.00</div>
+      </div>
+      <h2>{challengeItem.title}</h2>
+      <Board>
+        {challengeItem.stamp.map((color, index) => (
+          <ActiveStamp
+            key={index}
+            color={color}
+            className={index == challengeItem.stamp.length - 1 && "stamp-fill"}
+          />
+        ))}
+        {challengeItem.stamp.length < 30 && (
+          <StampSelect challengeItem={challengeItem} />
+        )}
+        {emptyBoard.map((n, index) => (
+          <InactiveStamp key={index}>{n + 1}</InactiveStamp>
+        ))}
+      </Board>
+      <div>
+        * 차례가 된 숫자를 클릭하면 스티커를 붙일 수 있어요!
+      </div>
+    </MyContainer>
+  );
+};
 
 const MyContainer = styled(Container)`
   padding: 3.5rem 4rem;
@@ -15,86 +49,73 @@ const MyContainer = styled(Container)`
   }
   ${"h2"} {
     margin: 0;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     padding: 0.25rem 1rem;
     border-left: 0.5rem solid #fcbda3;
     font-size: 20px;
     font-weight: bold;
   }
 `;
-const Wrap = styled.div`
-  width: 305px;
-  position: relative;
-`;
 const Board = styled.div`
-  position: absolute;
   display: grid;
+  margin-bottom: 3rem;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  transform: translateX(-0.4rem);
+  transform: translateX(-0.5rem);
   ${"div"} {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 3rem;
-    height: 3rem;
-    margin: 0.4rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    margin: 0.5rem;
     border-radius: 50%;
+    font-family: "BMJUA";
   }
 `;
-const Empty = styled.div`
+const InactiveStamp = styled.div`
   color: #fcfcfc;
-  position: absolute;
   background-color: #e0e0e0;
-  font-family: "BMJUA";
+  cursor: none;
 `;
-const Stamp = styled.div`
-  position: absolute;
+const ActiveStamp = styled.div`
   background-color: ${(props) => props.color};
-`;
-
-const StampBoard = (props) => {
-  const { state, action } = useContext(DataContext);
-  const { challengeItem } = props; // challengeList: {...}
-  const stampBoard = [];
-  for (let i = 0; i < 30; i++) {
-    stampBoard.push(i);
+  &.stamp-fill {
+    animation: stampFill 0.8s;
   }
-
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  return (
-    <MyContainer>
-      <div className="date">
-        <div>Today,</div>
-        <div>0000.00.00</div>
-      </div>
-      <h2>{challengeItem.title}</h2>
-      <Wrap>
-        <Board>
-          {stampBoard.map((n, index) => (
-            <div key={index}>
-              <Empty>{n + 1}</Empty>
-            </div>
-          ))}
-        </Board>
-        <Board>
-          {challengeItem.stamp.map((color, index) => (
-            <div key={index}>
-              <Stamp color={color} />
-            </div>
-          ))}
-          {challengeItem.stamp.length < 30 && (
-            <div>
-              <StampSelect challengeItem={challengeItem} />
-            </div>
-          )}
-        </Board>
-      </Wrap>
-    </MyContainer>
-  );
-};
+  @keyframes stampFill {
+    0% {
+      animation-timing-function: ease-in;
+      background-color: #e0e0e0;
+      opacity: 1;
+      transform: scale(1);
+    }
+    20% {
+      animation-timing-function: ease-out;
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    35% {
+      background-color: #e0e0e0;
+      opacity: 0;
+      transform: scale(1);
+    }
+    40% {
+      animation-timing-function: ease-out;
+      opacity: 1;
+      transform: scale(0);
+    }
+    60% {
+      animation-timing-function: ease-in-out;
+      transform: scale(1.2);
+    }
+    80% {
+      transform: scale(0.9);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+`;
 
 export default StampBoard;

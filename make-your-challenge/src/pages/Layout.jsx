@@ -4,11 +4,6 @@ import Sidebar from "../components/Sidebar";
 import { useContext, useEffect } from "react";
 import DataContext from "../context/DataContext";
 
-const Wrap = styled.div`
-  display: grid;
-  grid-template-columns: 280px 1fr;
-`;
-
 const Layout = () => {
   const { state } = useContext(DataContext);
   const navigator = useNavigate();
@@ -27,5 +22,10 @@ const Layout = () => {
     </Wrap>
   );
 };
+
+const Wrap = styled.div`
+  display: grid;
+  grid-template-columns: 280px 1fr;
+`;
 
 export default Layout;

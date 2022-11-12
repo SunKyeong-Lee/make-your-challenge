@@ -6,52 +6,6 @@ import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import DataContext from "../context/DataContext";
 
-const Wrap = styled.div`
-  ${"hr"} {
-    width: 280px;
-    transform: translateX(-2.5rem);
-    opacity: 0.1;
-  }
-  ${"h2"} {
-    display: flex;
-    width: 100%;
-    padding: 0.3rem 0;
-    margin-top: 2.5rem;
-    margin-bottom: 0;
-    font-size: 16px;
-    font-weight: bold;
-  }
-  ${"a"} {
-    display: block;
-    padding: 0.3rem 2rem;
-    margin-bottom: 0.1rem;
-    color: rgb(68, 70, 73);
-    text-decoration: none;
-    transition: all 0.35s;
-    &:hover {
-      color: #011126;
-      border-radius: 5px;
-      background-color: #fcbda3;
-      font-weight: bold;
-    }
-    &:active {
-      background-color: #f0884e;
-    }
-  }
-  .active {
-    border-radius: 5px;
-    color: #011126;
-    background-color: #fcbda3;
-    font-weight: bold;
-  }
-`;
-const IconStyle = styled.span`
-  cursor: pointer;
-  margin-left: auto;
-  transition: transform 0.35s;
-  transform: ${(props) => (props.open ? null : "rotate(180deg)")};
-`;
-
 const ChallengeList = () => {
   const { state } = useContext(DataContext);
   const [open, setOpen] = useState([true, true]);
@@ -109,5 +63,51 @@ const ChallengeList = () => {
     </Wrap>
   );
 };
+
+const Wrap = styled.div`
+  ${"hr"} {
+    width: 280px;
+    transform: translateX(-2.5rem);
+    opacity: 0.1;
+  }
+  ${"h2"} {
+    display: flex;
+    width: 100%;
+    padding: 0.3rem 0;
+    margin-top: 2.5rem;
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  ${"a"} {
+    display: block;
+    padding: 0.5rem 2rem;
+    margin-bottom: 0.1rem;
+    color: #444649;
+    text-decoration: none;
+    transition: all 0.35s;
+    &:hover {
+      color: #011126;
+      border-radius: 5px;
+      background-color: #fcbda3;
+      font-weight: bold;
+    }
+    &:active {
+      background-color: #f0884e;
+    }
+  }
+  .active {
+    border-radius: 5px;
+    color: #011126;
+    background-color: #fcbda3;
+    font-weight: bold;
+  }
+`;
+const IconStyle = styled.span`
+  cursor: pointer;
+  margin-left: auto;
+  transition: transform 0.35s;
+  transform: ${(props) => (props.open ? null : "rotate(180deg)")};
+`;
 
 export default ChallengeList;
