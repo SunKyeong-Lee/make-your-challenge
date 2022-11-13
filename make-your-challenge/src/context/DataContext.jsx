@@ -21,7 +21,7 @@ const DataProvider = ({ children }) => {
             "#2F3B7B", "#655A88", "#F4CAB2", "#F28F6B", "#D95F5F",
             "#BFA688", "#F2DEC4", "#F29544",
           ],
-          memo: [],
+          memo: ["운동 전후 스트레칭", "물 마시기"],
           diary: [],
         },
         {
@@ -42,7 +42,7 @@ const DataProvider = ({ children }) => {
         {
           challengeId: 3,
           challengeState: 0, // 완료한 챌린지
-          title: ["비타민 챙겨먹기"],
+          title: "비타민 챙겨먹기",
           stamp: [
             "#012744", "#155764", "#588681", "#8C9C88", "#F2DBAE",
             "#BFA688", "#F2DEC4", "#F29544", "#594A3C", "#8C7561",

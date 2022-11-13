@@ -6,8 +6,20 @@ import ChallengeList from "./ChallengeList";
 import Profile from "./Profile";
 import AddChallenge from "./AddChallenge";
 import DeleteChallenge from "./DeleteChallenge";
+import { useContext } from "react";
+import DataContext from "../context/DataContext";
+import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
+  const {state, action} = useContext(DataContext);
+  const navigator = useNavigate();
+
+  const logout = () => {
+    navigator("/");
+    // 수정
+    window.location.replace("/")
+  }
+
   return (
     <Wrap>
       <Profile />
@@ -16,7 +28,7 @@ function Sidebar() {
       <Container>
         <AddChallenge />
         <DeleteChallenge />
-        <button>
+        <button onClick={logout}>
           <FontAwesomeIcon icon={faRightFromBracket} className="me-3" />
           로그아웃
         </button>
@@ -26,7 +38,6 @@ function Sidebar() {
 }
 
 const Wrap = styled(Stack)`
-  height: 100vh;
   padding: 3.5rem 2.5rem;
   background-color: #f6f1eb;
   text-align: left;

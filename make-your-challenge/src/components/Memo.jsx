@@ -1,13 +1,147 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
+import { useContext, useLayoutEffect, useRef, useState } from "react";
+import DataContext from "../context/DataContext";
+
 const Memo = (props) => {
+  const { state, action } = useContext(DataContext);
   const { challengeItem } = props;
-  
+  const [show, setShow] = useState(false);
+  const textRef = useRef();
+
+  useLayoutEffect(() => {
+    if (textRef.current !== null) textRef.current.focus();
+  });
+
+  const resizeTextarea = () => {
+    textRef.current.style.height = "auto";
+    textRef.current.style.height = textRef.current.scrollHeight + "px";
+  };
+
+  const addMemo = (e) => {
+    if (e.target.value == "") {
+      setShow(false);
+      return state;
+    }
+    const newMemo = challengeItem.memo.concat(e.target.value);
+    const findIndex = state.user.challengeList.findIndex(
+      (n) => n.challengeId == challengeItem.challengeId
+    );
+    const copyChallengeList = state.user.challengeList;
+    if (findIndex != -1) {
+      copyChallengeList[findIndex] = {
+        ...copyChallengeList[findIndex],
+        memo: newMemo,
+      };
+    }
+    action.setUser({ ...state.user, challengeList: copyChallengeList });
+    setShow(false);
+    textRef.current.value = "";
+  };
+
+  const deleteMemo = (memo) => {
+    const newMemo = challengeItem.memo.filter((item) => item != memo);
+    const findIndex = state.user.challengeList.findIndex(
+      (n) => n.challengeId == challengeItem.challengeId
+    );
+    const copyChallengeList = state.user.challengeList;
+    if (findIndex != -1) {
+      copyChallengeList[findIndex] = {
+        ...copyChallengeList[findIndex],
+        memo: newMemo,
+      };
+    }
+    action.setUser({ ...state.user, challengeList: copyChallengeList });
+  };
 
   return (
-    <div>
-      <h1>메모</h1>
-      <p>{challengeItem.title}</p>
-    </div>
+    <Wrap>
+      {challengeItem.memo.length == 0 ? (
+        <MemoStyle style={show ? { display: "none" } : { color: "#bebebe" }}>
+          아직 작성된 메모가 없어요! <br /> 아래 버튼을 눌러 메모를 추가할 수
+          있어요!
+        </MemoStyle>
+      ) : undefined}
+      {challengeItem.memo.map((memo, index) => (
+        <MemoStyle key={index}>
+          <div>
+            {memo.split("\n").map((line) => {return (<span>{line}<br /></span>);})}
+          </div>
+          <FontAwesomeIcon icon={faXmark} onClick={() => {deleteMemo(memo);}}/>
+        </MemoStyle>
+      ))}
+      <textarea
+        rows={1}
+        style={show ? { display: "block" } : { display: "none" }}
+        onChange={resizeTextarea}
+        onBlur={addMemo}
+        ref={textRef}
+      />
+      <Button
+        onClick={() => {
+          setShow(true);
+        }}
+      >
+        <FontAwesomeIcon icon={faPlus} className="me-3" />
+        새 메모
+      </Button>
+    </Wrap>
   );
 };
+
+const Wrap = styled.div`
+  height: calc(100vh - 164px);
+  min-height: 632px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  ${"textarea"} {
+    width: calc(100% - 32px);
+    padding: 1.5rem 1.2rem;
+    margin: 1.5rem 1rem 1rem 1rem;
+    border: 1px solid #e7e0d6;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #eeeeee;
+    background-color: #f6f1eb;
+    resize: none;
+    overflow-y: hidden;
+    transition: all 0.35s;
+    &:focus {
+      outline: 1px solid #bebebe;
+      min-height: 120px;
+    }
+  }
+`;
+const MemoStyle = styled.div`
+  display: flex;
+  min-height: 120px;
+  padding: 1.5rem 1.2rem;
+  margin: 1.5rem 1rem 1rem 1rem;
+  border: 1px solid #e7e0d6;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #eeeeee;
+  background-color: #f6f1eb;
+  ${"svg"} {
+    color: #bebebe;
+    margin-left: auto;
+    padding-left: 1rem;
+    cursor: pointer;
+    &:hover {
+      color: #011126;
+    }
+  }
+`;
+const Button = styled.button`
+  height: auto;
+  display: block;
+  margin-right: 1rem;
+  padding-right: 0.5rem;
+  background-color: #fcfcfc;
+  color: #f0884e;
+  float: right;
+  &:hover {
+    font-weight: bold;
+  }
+`;
 
 export default Memo;

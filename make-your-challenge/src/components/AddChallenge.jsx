@@ -25,7 +25,7 @@ const AddChallenge = () => {
       diary: [],
     });
     action.setUser({
-      ...state,
+      ...state.user,
       challengeList: newChallengeList,
       challengeCount: state.user.challengeCount + 1,
     });

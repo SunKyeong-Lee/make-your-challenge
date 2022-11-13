@@ -12,9 +12,12 @@ const StampSelect = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  /** user.challengeList에서 해당 challengeItem을 찾아 stamp 값 바꾸기 */
+  /* user.challengeList에서 해당 challengeItem을 찾아 stamp 값 바꾸기 */
   const select = () => {
+    // stamp 새 배열을 만들기 위함
     const newUserStamp = challengeItem.stamp.concat(selectColor);
+    // 도장판을 모두 채우면 챌린지 진행 상태 변경을 위함
+    const newChallengeState = newUserStamp.length == 30 ? 0 : 1;
     const findIndex = state.user.challengeList.findIndex(
       (n) => n.challengeId == challengeItem.challengeId
     );
@@ -22,6 +25,7 @@ const StampSelect = (props) => {
     if (findIndex != -1) {
       copyChallengeList[findIndex] = {
         ...copyChallengeList[findIndex],
+        challengeState: newChallengeState,
         stamp: newUserStamp,
       };
     }

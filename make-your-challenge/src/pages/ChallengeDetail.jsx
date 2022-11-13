@@ -10,12 +10,11 @@ const ChallengeDetail = () => {
   const { state } = useContext(DataContext);
   const { id } = useParams(); // id : challengeId(문자열)
   const [tab, setTab] = useState([true, false]);
-
-  const tabAction = () => setTab([!tab[0], !tab[1]]);
-
   const challengeItem = state.user.challengeList.find(
     (n) => n.challengeId === parseInt(id)
   );
+
+  const tabAction = () => setTab([!tab[0], !tab[1]]);
 
   return (
     <Wrap>
@@ -38,10 +37,16 @@ const ChallengeDetail = () => {
         </MyButton>
 
         <MyTab className={tab[0] ? undefined : "hidden"}>
-          <Memo challengeItem={challengeItem} />
+          <Memo
+            challengeItem={challengeItem}
+            className={tab[0] ? undefined : "hidden"}
+          />
         </MyTab>
         <MyTab className={tab[1] ? undefined : "hidden"}>
-          <Diary challengeItem={challengeItem} />
+          <Diary
+            challengeItem={challengeItem}
+            className={tab[1] ? undefined : "hidden"}
+          />
         </MyTab>
       </TabWrap>
     </Wrap>
@@ -49,10 +54,13 @@ const ChallengeDetail = () => {
 };
 
 const Wrap = styled.div`
+  height: 100%;
+  min-height: 800px;
   display: grid;
   grid-template-columns: minmax(520px, auto) 1fr;
 `;
 const TabWrap = styled.div`
+  min-width: 480px;
   padding: 3.5rem 2.5rem;
   box-shadow: #eeeeee 1px 0 30px;
 `;
@@ -68,7 +76,7 @@ const MyButton = styled.h2`
   margin-bottom: 1.5rem;
   font-size: 23px;
   font-family: "BMJUA";
-  transform: translate(8px, 6px);
+  transform: translate(23px, 6px);
   z-index: 0;
   cursor: pointer;
   &:first-child::after {

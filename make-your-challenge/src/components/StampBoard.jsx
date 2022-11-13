@@ -1,5 +1,6 @@
 import Container from "react-bootstrap/Container";
 import styled from "styled-components";
+import DateComp from "./DateComp";
 import StampSelect from "./StampSelect";
 
 const StampBoard = (props) => {
@@ -13,7 +14,7 @@ const StampBoard = (props) => {
     <MyContainer>
       <div className="date">
         <div>Today,</div>
-        <div>0000.00.00</div>
+        <DateComp />
       </div>
       <h2>{challengeItem.title}</h2>
       <Board>
@@ -76,7 +77,7 @@ const Board = styled.div`
 const InactiveStamp = styled.div`
   color: #fcfcfc;
   background-color: #e0e0e0;
-  cursor: none;
+  cursor: default;
 `;
 const ActiveStamp = styled.div`
   background-color: ${(props) => props.color};
