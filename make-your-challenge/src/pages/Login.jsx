@@ -17,6 +17,8 @@ function Login() {
     );
     if (findUser) {
       action.setUser(findUser);
+      window.localStorage.setItem('userId', findUser.userId);
+      window.localStorage.setItem('password', findUser.password);
       navigator("/main");
     } else {
       setLogin(false);

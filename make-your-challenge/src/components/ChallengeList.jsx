@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import DataContext from "../context/DataContext";
 
 const ChallengeList = () => {
-  const { state } = useContext(DataContext);
+  const { state, action } = useContext(DataContext);
   const [open, setOpen] = useState([true, true]);
 
   return (

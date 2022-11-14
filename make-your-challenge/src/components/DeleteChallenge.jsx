@@ -22,9 +22,8 @@ const DeleteChallenge = () => {
     const newChallengeList = state.user.challengeList.filter(
       (item) => item.challengeId != id
     );
-    console.log(newChallengeList);
     action.setUser({
-      ...state,
+      ...state.user,
       challengeList: newChallengeList,
     });
     const item = newChallengeList.filter((item) => item.challengeState === 1);

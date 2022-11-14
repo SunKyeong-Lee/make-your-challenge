@@ -47,6 +47,7 @@ const Diary = (props) => {
     action.setUser({ ...state.user, challengeList: copyChallengeList });
     textRef.current.style.height = "auto";
     textRef.current.value = "";
+    // 텍스트에리아 작성값이 남아있음 수정필요
   };
 
   const deleteDiary = (item) => {
@@ -91,7 +92,7 @@ const Diary = (props) => {
               <FontAwesomeIcon icon={faTrash} />
             </div>
           </Head>
-          <Body>{item.diaryContent}</Body>
+          <Body>{item.diaryContent.split("\n").map((line) => {return (<span>{line}<br /></span>);})}</Body>
         </DairyWarp>
       ))}
     </Wrap>
