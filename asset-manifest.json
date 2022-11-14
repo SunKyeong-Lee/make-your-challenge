@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/make-your-challenge/static/css/main.2386722f.css",
-    "main.js": "/make-your-challenge/static/js/main.72f1f23c.js",
+    "main.js": "/make-your-challenge/static/js/main.bd14ae03.js",
     "static/js/787.0abecdae.chunk.js": "/make-your-challenge/static/js/787.0abecdae.chunk.js",
     "index.html": "/make-your-challenge/index.html",
     "main.2386722f.css.map": "/make-your-challenge/static/css/main.2386722f.css.map",
-    "main.72f1f23c.js.map": "/make-your-challenge/static/js/main.72f1f23c.js.map",
+    "main.bd14ae03.js.map": "/make-your-challenge/static/js/main.bd14ae03.js.map",
     "787.0abecdae.chunk.js.map": "/make-your-challenge/static/js/787.0abecdae.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2386722f.css",
-    "static/js/main.72f1f23c.js"
+    "static/js/main.bd14ae03.js"
   ]
 }
