@@ -30,7 +30,7 @@ const AddChallenge = () => {
       challengeCount: state.user.challengeCount + 1,
     });
     setShow(false);
-    navigator("/main/" + (state.user.challengeCount + 1));
+    navigator("/board/" + (state.user.challengeCount + 1));
   };
 
   return (

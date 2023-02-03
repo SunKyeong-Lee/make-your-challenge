@@ -12,7 +12,7 @@ const Layout = () => {
     const item = state.user.challengeList.filter(
       (item) => item.challengeState === 1
     );
-    navigator("/main/" + item[0].challengeId);
+    navigator("/board/" + item[0].challengeId);
   }, []);
 
   return (

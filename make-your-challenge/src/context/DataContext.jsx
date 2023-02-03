@@ -21,7 +21,10 @@ const DataProvider = ({ children }) => {
             "#2F3B7B", "#655A88", "#F4CAB2", "#F28F6B", "#D95F5F",
             "#BFA688", "#F2DEC4", "#F29544",
           ],
-          memo: ["운동 전후 스트레칭", "물 마시기"],
+          memo: [
+            { memoId: 1, text: "운동 전후 스트레칭 하기" },
+            { memoId: 2, text: "물 자주 마시기" }
+          ],
           diary: [],
         },
         {
@@ -56,6 +59,7 @@ const DataProvider = ({ children }) => {
         },
       ],
       challengeCount: 3,
+      memoCount: 2,
     },
     {
       userId: "edf123",

@@ -27,7 +27,7 @@ const DeleteChallenge = () => {
       challengeList: newChallengeList,
     });
     const item = newChallengeList.filter((item) => item.challengeState === 1);
-    navigator("/main/" + item[0].challengeId);
+    navigator("/board/" + item[0].challengeId);
     setShow(false);
   };
 

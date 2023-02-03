@@ -30,7 +30,7 @@ const ChallengeList = () => {
             (item) =>
               item.challengeState === 1 && (
                 <li key={item.challengeId}>
-                  <NavLink to={"/main/" + item.challengeId}>{item.title}</NavLink>
+                  <NavLink to={"/board/" + item.challengeId}>{item.title}</NavLink>
                 </li>
               )
           )}
@@ -54,7 +54,7 @@ const ChallengeList = () => {
             (item) =>
               item.challengeState === 0 && (
                 <li key={item.challengeId}>
-                  <NavLink to={"/main/" + item.challengeId}>{item.title}</NavLink>
+                  <NavLink to={"/board/" + item.challengeId}>{item.title}</NavLink>
                 </li>
               )
           )}

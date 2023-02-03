@@ -24,9 +24,12 @@ const Memo = (props) => {
       setShow(false);
       return state;
     }
-    const newMemo = challengeItem.memo.concat(e.target.value);
+    const newMemo = challengeItem.memo.concat({
+      memoId: ++state.user.memoCount,
+      text: e.target.value,
+    });
     const findIndex = state.user.challengeList.findIndex(
-      (n) => n.challengeId == challengeItem.challengeId
+      (el) => el.challengeId == challengeItem.challengeId
     );
     const copyChallengeList = state.user.challengeList;
     if (findIndex != -1) {
@@ -38,10 +41,13 @@ const Memo = (props) => {
     action.setUser({ ...state.user, challengeList: copyChallengeList });
     setShow(false);
     textRef.current.value = "";
+    textRef.current.style.height = "auto";
   };
 
   const deleteMemo = (memo) => {
-    const newMemo = challengeItem.memo.filter((item) => item != memo);
+    const newMemo = challengeItem.memo.filter(
+      (item) => item.memoId != memo.memoId
+    );
     const findIndex = state.user.challengeList.findIndex(
       (n) => n.challengeId == challengeItem.challengeId
     );
@@ -59,16 +65,19 @@ const Memo = (props) => {
     <Wrap>
       {challengeItem.memo.length == 0 ? (
         <MemoStyle style={show ? { display: "none" } : { color: "#bebebe" }}>
-          아직 작성된 메모가 없어요! <br /> 아래 버튼을 눌러 메모를 추가할 수
-          있어요!
+          아직 작성된 메모가 없어요!
+          <br /> 아래 버튼을 눌러 메모를 추가할 수 있어요!
         </MemoStyle>
       ) : undefined}
-      {challengeItem.memo.map((memo, index) => (
-        <MemoStyle key={index}>
-          <div>
-            {memo.split("\n").map((line) => {return (<span>{line}<br /></span>);})}
-          </div>
-          <FontAwesomeIcon icon={faXmark} onClick={() => {deleteMemo(memo);}}/>
+      {challengeItem.memo.map((memo) => (
+        <MemoStyle key={memo.memoId}>
+          <div>{memo.text}</div>
+          <FontAwesomeIcon
+            icon={faXmark}
+            onClick={() => {
+              deleteMemo(memo);
+            }}
+          />
         </MemoStyle>
       ))}
       <textarea
@@ -83,8 +92,7 @@ const Memo = (props) => {
           setShow(true);
         }}
       >
-        <FontAwesomeIcon icon={faPlus} className="me-3" />
-        새 메모
+        <FontAwesomeIcon icon={faPlus} className="me-3" />새 메모
       </Button>
     </Wrap>
   );
@@ -95,6 +103,7 @@ const Wrap = styled.div`
   min-height: 632px;
   box-sizing: border-box;
   overflow-y: auto;
+  white-space: pre-wrap;
   ${"textarea"} {
     width: calc(100% - 32px);
     padding: 1.5rem 1.2rem;

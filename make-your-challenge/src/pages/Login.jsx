@@ -17,9 +17,8 @@ function Login() {
     );
     if (findUser) {
       action.setUser(findUser);
-      window.localStorage.setItem('userId', findUser.userId);
-      window.localStorage.setItem('password', findUser.password);
-      navigator("/main");
+      window.sessionStorage.setItem("userId", findUser.userId);
+      navigator("/board");
     } else {
       setLogin(false);
     }
@@ -32,13 +31,17 @@ function Login() {
         <input
           type="text"
           placeholder="아이디"
-          onChange={(e) => {setId(e.target.value);}}
+          onChange={(e) => {
+            setId(e.target.value);
+          }}
           required
         />
         <input
           type="password"
           placeholder="비밀번호"
-          onChange={(e) => {setPassword(e.target.value);}}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
           required
         />
         <Notice login={login}>
@@ -72,7 +75,8 @@ const MyButton = styled.button`
   color: #9e9e9e;
   background-color: #f6f1eb;
   box-shadow: #f6f1eb 0 0px 0px 2px inset;
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     font-weight: bold;
     color: #011126;
     background-color: #f6f1eb;
@@ -85,7 +89,7 @@ const MyButton = styled.button`
   }
 `;
 const Notice = styled.div`
-  display: ${(props) => (props.login? "none" : "block")};
+  display: ${(props) => (props.login ? "none" : "block")};
   font-size: 13px;
   color: #f0884e;
 `;
