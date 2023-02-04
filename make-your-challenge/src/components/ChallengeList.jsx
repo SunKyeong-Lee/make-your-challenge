@@ -23,24 +23,18 @@ const ChallengeList = () => {
         </IconStyle>
       </h2>
       <Collapse in={open[0]}>
-        {state.currentUser.challengeList.filter(
-          (item) => item.challengeState === 1
-        ).length > 0 ? (
-          <div>
-            {state.currentUser.challengeList.map(
-              (item) =>
-                item.challengeState === 1 && (
-                  <li key={item.challengeId}>
-                    <NavLink to={"/board/" + item.challengeId}>
-                      {item.title}
-                    </NavLink>
-                  </li>
-                )
-            )}
-          </div>
-        ) : (
-          <div className="empty">empty</div>
-        )}
+        <div>
+          {state.currentUser.challengeList.map(
+            (item) =>
+              item.challengeState === 1 && (
+                <li key={item.challengeId}>
+                  <NavLink to={"/board/" + item.challengeId}>
+                    {item.title}
+                  </NavLink>
+                </li>
+              )
+          )}
+        </div>
       </Collapse>
 
       <h2>
@@ -54,24 +48,18 @@ const ChallengeList = () => {
         </IconStyle>
       </h2>
       <Collapse in={open[1]}>
-        {state.currentUser.challengeList.filter(
-          (item) => item.challengeState === 0
-        ).length > 0 ? (
-          <div>
-            {state.currentUser.challengeList.map(
-              (item) =>
-                item.challengeState === 0 && (
-                  <li key={item.challengeId}>
-                    <NavLink to={"/board/" + item.challengeId}>
-                      {item.title}
-                    </NavLink>
-                  </li>
-                )
-            )}
-          </div>
-        ) : (
-          <div className="empty">empty</div>
-        )}
+        <div>
+          {state.currentUser.challengeList.map(
+            (item) =>
+              item.challengeState === 0 && (
+                <li key={item.challengeId}>
+                  <NavLink to={"/board/" + item.challengeId}>
+                    {item.title}
+                  </NavLink>
+                </li>
+              )
+          )}
+        </div>
       </Collapse>
     </Wrap>
   );
