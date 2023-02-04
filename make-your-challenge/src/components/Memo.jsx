@@ -20,25 +20,27 @@ const Memo = (props) => {
   };
 
   const addMemo = (e) => {
-    if (e.target.value == "") {
+    if (e.target.value.trim() == "") {
+      textRef.current.value = "";
+      textRef.current.style.height = "auto";
       setShow(false);
       return state;
     }
     const newMemo = challengeItem.memo.concat({
-      memoId: ++state.user.memoCount,
+      memoId: ++state.currentUser.memoCount,
       text: e.target.value,
     });
-    const findIndex = state.user.challengeList.findIndex(
+    const findIndex = state.currentUser.challengeList.findIndex(
       (el) => el.challengeId == challengeItem.challengeId
     );
-    const copyChallengeList = state.user.challengeList;
+    const copyChallengeList = state.currentUser.challengeList;
     if (findIndex != -1) {
       copyChallengeList[findIndex] = {
         ...copyChallengeList[findIndex],
         memo: newMemo,
       };
     }
-    action.setUser({ ...state.user, challengeList: copyChallengeList });
+    action.setCurrentUser({ ...state.currentUser, challengeList: copyChallengeList });
     setShow(false);
     textRef.current.value = "";
     textRef.current.style.height = "auto";
@@ -48,17 +50,17 @@ const Memo = (props) => {
     const newMemo = challengeItem.memo.filter(
       (item) => item.memoId != memo.memoId
     );
-    const findIndex = state.user.challengeList.findIndex(
+    const findIndex = state.currentUser.challengeList.findIndex(
       (n) => n.challengeId == challengeItem.challengeId
     );
-    const copyChallengeList = state.user.challengeList;
+    const copyChallengeList = state.currentUser.challengeList;
     if (findIndex != -1) {
       copyChallengeList[findIndex] = {
         ...copyChallengeList[findIndex],
         memo: newMemo,
       };
     }
-    action.setUser({ ...state.user, challengeList: copyChallengeList });
+    action.setCurrentUser({ ...state.currentUser, challengeList: copyChallengeList });
   };
 
   return (
@@ -66,7 +68,8 @@ const Memo = (props) => {
       {challengeItem.memo.length == 0 ? (
         <MemoStyle style={show ? { display: "none" } : { color: "#bebebe" }}>
           아직 작성된 메모가 없어요!
-          <br /> 아래 버튼을 눌러 메모를 추가할 수 있어요!
+          <br />
+          아래 버튼을 눌러 메모를 추가할 수 있어요!
         </MemoStyle>
       ) : undefined}
       {challengeItem.memo.map((memo) => (
@@ -114,7 +117,6 @@ const Wrap = styled.div`
     background-color: #f6f1eb;
     resize: none;
     overflow-y: hidden;
-    transition: all 0.35s;
     &:focus {
       outline: 1px solid #bebebe;
       min-height: 120px;

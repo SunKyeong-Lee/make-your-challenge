@@ -10,7 +10,7 @@ const Profile = () => {
       <ProfileImg />
       <User>
         <div>user</div>
-        <div>{state.user.nickname}</div>
+        <div>{state.currentUser.nickname}</div>
       </User>
     </Wrap>
   );

@@ -34,17 +34,17 @@ const Diary = (props) => {
       date: getDate(),
       diaryContent: content,
     });
-    const findIndex = state.user.challengeList.findIndex(
+    const findIndex = state.currentUser.challengeList.findIndex(
       (n) => n.challengeId == challengeItem.challengeId
     );
-    const copyChallengeList = state.user.challengeList;
+    const copyChallengeList = state.currentUser.challengeList;
     if (findIndex != -1) {
       copyChallengeList[findIndex] = {
         ...copyChallengeList[findIndex],
         diary: newDiary,
       };
     }
-    action.setUser({ ...state.user, challengeList: copyChallengeList });
+    action.setCurrentUser({ ...state.currentUser, challengeList: copyChallengeList });
     textRef.current.style.height = "auto";
     textRef.current.value = "";
     // 텍스트에리아 작성값이 남아있음 수정필요
@@ -55,17 +55,17 @@ const Diary = (props) => {
     const newDiary = challengeItem.diary.filter(
       (n) => n.diaryId != item.diaryId
     );
-    const findIndex = state.user.challengeList.findIndex(
+    const findIndex = state.currentUser.challengeList.findIndex(
       (n) => n.challengeId == challengeItem.challengeId
     );
-    const copyChallengeList = state.user.challengeList;
+    const copyChallengeList = state.currentUser.challengeList;
     if (findIndex != -1) {
       copyChallengeList[findIndex] = {
         ...copyChallengeList[findIndex],
         diary: newDiary,
       };
     }
-    action.setUser({ ...state.user, challengeList: copyChallengeList });
+    action.setCurrentUser({ ...state.currentUser, challengeList: copyChallengeList });
   };
 
   return (

@@ -22,17 +22,17 @@ const Intro = () => {
 };
 
 const Wrap = styled.div`
-  ${"div"} {
+  div {
     min-height: 100vh;
     display: grid;
     place-content: center;
     text-align: center;
   }
-  ${"h1"} {
+  h1 {
     font-family: "BMJUA";
     font-size: 3rem;
   }
-  ${"p"} {
+  p {
     color: #9e9e9e;
     margin-bottom: 20px;
   }

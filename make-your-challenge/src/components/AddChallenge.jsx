@@ -2,42 +2,50 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 import Modal from "react-bootstrap/Modal";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import DataContext from "../context/DataContext";
-import { useNavigate } from "react-router-dom";
 
 const AddChallenge = () => {
   const { state, action } = useContext(DataContext);
   const [show, setShow] = useState(false);
   const [title, setTitle] = useState("");
+  const [titleCheck, setTitleCheck] = useState(true);
   const navigator = useNavigate();
 
-  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleClose = () => {
+    setShow(false);
+    setTitle("");
+    setTitleCheck(true);
+  };
 
   const addChallenge = () => {
-    const newChallengeList = state.user.challengeList.concat({
-      challengeId: state.user.challengeCount + 1,
+    if (title.trim() === "") {
+      setTitleCheck(false);
+      return;
+    }
+    const newChallengeList = state.currentUser.challengeList.concat({
+      challengeId: state.currentUser.challengeCount + 1,
       challengeState: 1,
       title: title,
       stamp: [],
       memo: [],
       diary: [],
     });
-    action.setUser({
-      ...state.user,
+    action.setCurrentUser({
+      ...state.currentUser,
       challengeList: newChallengeList,
-      challengeCount: state.user.challengeCount + 1,
+      challengeCount: state.currentUser.challengeCount + 1,
     });
     setShow(false);
-    navigator("/board/" + (state.user.challengeCount + 1));
+    navigator("/board/" + (state.currentUser.challengeCount + 1));
   };
 
   return (
     <div>
       <button onClick={handleShow}>
-        <FontAwesomeIcon icon={faSquarePlus} className="me-3" />
-        새 챌린지 만들기
+        <FontAwesomeIcon icon={faSquarePlus} className="me-3" />새 챌린지 만들기
       </button>
 
       <ModalStyle show={show} onHide={handleClose} centered>
@@ -47,9 +55,17 @@ const AddChallenge = () => {
         <Modal.Body>
           <input
             type="text"
-            onChange={(e) => {setTitle(e.target.value);}}
+            onChange={(e) => {
+              if (e.target.focus) {
+                setTitleCheck(true);
+              }
+              setTitle(e.target.value);
+            }}
             placeholder="챌린지 제목"
           />
+          <Notice titleCheck={titleCheck}>
+            ※ 제목이 비어있어요! 제목을 입력해주세요!
+          </Notice>
         </Modal.Body>
         <Modal.Footer>
           <MyButton color={"#bebebe"} hover={"#9e9e9e"} onClick={handleClose}>
@@ -72,16 +88,28 @@ const MyButton = styled.button`
   }
 `;
 const ModalStyle = styled(Modal)`
-  ${"div"} {
+  .modal-content {
+    padding: 0.5rem;
+  }
+  div {
     border: none;
-    ${"input"} {
+    input {
       margin: 0;
       background-color: #ffffff;
       &:focus {
         background-color: #fcfcfc;
       }
     }
+    p {
+      margin-top: 1rem;
+      margin-bottom: 0;
+    }
   }
+`;
+const Notice = styled.div`
+  display: ${(props) => (props.titleCheck ? "none" : "inline-block")};
+  color: #f0884e;
+  margin-top: 1rem;
 `;
 
 export default AddChallenge;

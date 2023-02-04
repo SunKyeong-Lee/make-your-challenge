@@ -1,10 +1,16 @@
 import Container from "react-bootstrap/Container";
 import styled from "styled-components";
-import DateComp from "./DateComp";
 import StampSelect from "./StampSelect";
+import { useState } from "react";
 
 const StampBoard = (props) => {
   const { challengeItem } = props; // challengeList: {...}
+
+  const [today, setToday] = useState(new Date());
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const date = String(today.getDate() + 1).padStart(2, "0");
+
   const emptyBoard = [];
   for (let i = challengeItem.stamp.length + 1; i < 30; i++) {
     emptyBoard.push(i);
@@ -14,12 +20,14 @@ const StampBoard = (props) => {
     <MyContainer>
       <div className="date">
         <div>Today,</div>
-        <DateComp />
+        <div>
+          {year}. {month}. {date}
+        </div>
       </div>
       <h2>{challengeItem.title}</h2>
       <Board>
         {challengeItem.stamp.map((color, index) => (
-          <ActiveStamp
+          <FillStamp
             key={index}
             color={color}
             className={index == challengeItem.stamp.length - 1 && "stamp-fill"}
@@ -28,13 +36,11 @@ const StampBoard = (props) => {
         {challengeItem.stamp.length < 30 && (
           <StampSelect challengeItem={challengeItem} />
         )}
-        {emptyBoard.map((n, index) => (
-          <InactiveStamp key={index}>{n + 1}</InactiveStamp>
+        {emptyBoard.map((num, index) => (
+          <EmptyStamp key={index}>{num + 1}</EmptyStamp>
         ))}
       </Board>
-      <div>
-        * 차례가 된 숫자를 클릭하면 스티커를 붙일 수 있어요!
-      </div>
+      <div>* 차례가 된 숫자를 클릭하면 스티커를 붙일 수 있어요!</div>
     </MyContainer>
   );
 };
@@ -43,12 +49,12 @@ const MyContainer = styled(Container)`
   padding: 3.5rem 4rem;
   .date {
     margin-bottom: 3rem;
-    ${"div"} {
+    div {
       font-size: 23px;
       font-family: "BMJUA";
     }
   }
-  ${"h2"} {
+  h2 {
     margin: 0;
     margin-bottom: 2rem;
     padding: 0.25rem 1rem;
@@ -63,7 +69,7 @@ const Board = styled.div`
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(6, 1fr);
   transform: translateX(-0.5rem);
-  ${"div"} {
+  div {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -74,12 +80,12 @@ const Board = styled.div`
     font-family: "BMJUA";
   }
 `;
-const InactiveStamp = styled.div`
+const EmptyStamp = styled.div`
   color: #fcfcfc;
   background-color: #e0e0e0;
   cursor: default;
 `;
-const ActiveStamp = styled.div`
+const FillStamp = styled.div`
   background-color: ${(props) => props.color};
   &.stamp-fill {
     animation: stampFill 0.8s;

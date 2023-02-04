@@ -5,12 +5,12 @@ import DataContext from "../context/DataContext";
 
 const StampSelect = (props) => {
   const { state, action } = useContext(DataContext);
-  const { challengeItem } = props; // {challengeId, challengeState...}
+  const { challengeItem } = props;
   const [selectColor, setSelectColor] = useState(state.stamp[0]);
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   /* user.challengeList에서 해당 challengeItem을 찾아 stamp 값 바꾸기 */
   const select = () => {
@@ -18,10 +18,10 @@ const StampSelect = (props) => {
     const newUserStamp = challengeItem.stamp.concat(selectColor);
     // 도장판을 모두 채우면 챌린지 진행 상태 변경을 위함
     const newChallengeState = newUserStamp.length == 30 ? 0 : 1;
-    const findIndex = state.user.challengeList.findIndex(
-      (n) => n.challengeId == challengeItem.challengeId
+    const findIndex = state.currentUser.challengeList.findIndex(
+      (el) => el.challengeId == challengeItem.challengeId
     );
-    const copyChallengeList = state.user.challengeList;
+    const copyChallengeList = state.currentUser.challengeList;
     if (findIndex != -1) {
       copyChallengeList[findIndex] = {
         ...copyChallengeList[findIndex],
@@ -29,7 +29,7 @@ const StampSelect = (props) => {
         stamp: newUserStamp,
       };
     }
-    action.setUser({ ...state.user, challengeList: copyChallengeList });
+    action.setCurrentUser({ ...state.currentUser, challengeList: copyChallengeList });
     handleClose();
   };
 
@@ -83,7 +83,7 @@ const Board = styled.div`
   grid-auto-rows: auto;
   justify-items: center;
   margin: auto;
-  ${"div"} {
+  div {
     display: flex;
     align-items: center;
     justify-content: center;

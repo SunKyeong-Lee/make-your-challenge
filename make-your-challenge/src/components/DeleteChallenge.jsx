@@ -11,7 +11,7 @@ const DeleteChallenge = () => {
   const { id } = useParams(); // id : challengeId(문자열)
   const [show, setShow] = useState(false);
   const navigator = useNavigate();
-  const challengeTitle = state.user.challengeList.find(
+  const challengeTitle = state.currentUser.challengeList.find(
     (item) => item.challengeId == id
   );
 
@@ -19,15 +19,22 @@ const DeleteChallenge = () => {
   const handleShow = () => setShow(true);
 
   const deleteChallenge = () => {
-    const newChallengeList = state.user.challengeList.filter(
+    const newChallengeList = state.currentUser.challengeList.filter(
       (item) => item.challengeId != id
     );
-    action.setUser({
-      ...state.user,
+    action.setCurrentUser({
+      ...state.currentUser,
       challengeList: newChallengeList,
     });
-    const item = newChallengeList.filter((item) => item.challengeState === 1);
-    navigator("/board/" + item[0].challengeId);
+    const itemlist1 = newChallengeList.filter((item) => item.challengeState === 1);
+    const itemlist2 = newChallengeList.filter((item) => item.challengeState === 0);
+    if (itemlist1.length > 0) {
+      navigator("/board/" + itemlist1[0].challengeId);
+    } else if (itemlist2.length > 0) {
+      navigator("/board/" + itemlist2[0].challengeId);
+    } else {
+      navigator("/board");
+    }
     setShow(false);
   };
 

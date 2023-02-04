@@ -68,8 +68,12 @@ const DataProvider = ({ children }) => {
       profile: null,
       challengeList: [],
       challengeCount: 0,
+      memoCount: 0,
     },
   ]);
+
+  // 로그인한 유저 정보
+  const [currentUser, setCurrentUser] = useState({});
 
   // 스탬프 컬러 정보
   const [stamp, setStamp] = useState([
@@ -82,8 +86,8 @@ const DataProvider = ({ children }) => {
   ]);
 
   const value = {
-    state: { user, stamp },
-    action: { setUser, setStamp },
+    state: { user, stamp, currentUser },
+    action: { setUser, setStamp, setCurrentUser },
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

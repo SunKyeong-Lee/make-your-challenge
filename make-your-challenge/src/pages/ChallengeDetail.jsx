@@ -10,7 +10,7 @@ const ChallengeDetail = () => {
   const { state } = useContext(DataContext);
   const { id } = useParams(); // id : challengeId(문자열)
   const [tab, setTab] = useState([true, false]);
-  const challengeItem = state.user.challengeList.find(
+  const challengeItem = state.currentUser.challengeList.find(
     (n) => n.challengeId === parseInt(id)
   );
 
@@ -57,7 +57,7 @@ const Wrap = styled.div`
   height: 100%;
   min-height: 800px;
   display: grid;
-  grid-template-columns: minmax(520px, auto) 1fr;
+  grid-template-columns: 520px 1fr;
 `;
 const TabWrap = styled.div`
   min-width: 480px;
@@ -86,7 +86,7 @@ const MyButton = styled.h2`
     border: 1px solid #bebebe;
     margin: 0 1.5rem 0 1rem;
   }
-  ${"div"} {
+  div {
     &.active {
       position: absolute;
       top: -6px;

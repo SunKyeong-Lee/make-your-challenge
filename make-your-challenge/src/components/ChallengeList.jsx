@@ -7,34 +7,40 @@ import { NavLink } from "react-router-dom";
 import DataContext from "../context/DataContext";
 
 const ChallengeList = () => {
-  const { state, action } = useContext(DataContext);
+  const { state } = useContext(DataContext);
   const [open, setOpen] = useState([true, true]);
 
   return (
     <Wrap>
-      <hr />
       <h2>
         <span>진행중인 챌린지</span>
         <IconStyle
           open={open[0]}
           onClick={() => setOpen([!open[0], open[1]])}
-          aria-controls="collapse-text1"
           aria-expanded={open[0]}
         >
           <FontAwesomeIcon icon={faChevronDown} />
         </IconStyle>
       </h2>
       <Collapse in={open[0]}>
-        <div id="collapse-text1">
-          {state.user.challengeList.map(
-            (item) =>
-              item.challengeState === 1 && (
-                <li key={item.challengeId}>
-                  <NavLink to={"/board/" + item.challengeId}>{item.title}</NavLink>
-                </li>
-              )
-          )}
-        </div>
+        {state.currentUser.challengeList.filter(
+          (item) => item.challengeState === 1
+        ).length > 0 ? (
+          <div>
+            {state.currentUser.challengeList.map(
+              (item) =>
+                item.challengeState === 1 && (
+                  <li key={item.challengeId}>
+                    <NavLink to={"/board/" + item.challengeId}>
+                      {item.title}
+                    </NavLink>
+                  </li>
+                )
+            )}
+          </div>
+        ) : (
+          <div className="empty">empty</div>
+        )}
       </Collapse>
 
       <h2>
@@ -42,44 +48,50 @@ const ChallengeList = () => {
         <IconStyle
           open={open[1]}
           onClick={() => setOpen([open[0], !open[1]])}
-          aria-controls="collapse-text2"
           aria-expanded={open[1]}
         >
           <FontAwesomeIcon icon={faChevronDown} />
         </IconStyle>
       </h2>
       <Collapse in={open[1]}>
-        <div id="collapse-text2">
-          {state.user.challengeList.map(
-            (item) =>
-              item.challengeState === 0 && (
-                <li key={item.challengeId}>
-                  <NavLink to={"/board/" + item.challengeId}>{item.title}</NavLink>
-                </li>
-              )
-          )}
-        </div>
+        {state.currentUser.challengeList.filter(
+          (item) => item.challengeState === 0
+        ).length > 0 ? (
+          <div>
+            {state.currentUser.challengeList.map(
+              (item) =>
+                item.challengeState === 0 && (
+                  <li key={item.challengeId}>
+                    <NavLink to={"/board/" + item.challengeId}>
+                      {item.title}
+                    </NavLink>
+                  </li>
+                )
+            )}
+          </div>
+        ) : (
+          <div className="empty">empty</div>
+        )}
       </Collapse>
     </Wrap>
   );
 };
 
 const Wrap = styled.div`
-  ${"hr"} {
-    width: 280px;
-    transform: translateX(-2.5rem);
-    opacity: 0.1;
-  }
-  ${"h2"} {
+  height: 60%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  word-break: break-all;
+  h2 {
     display: flex;
     width: 100%;
-    padding: 0.3rem 0;
-    margin-top: 2.5rem;
-    margin-bottom: 0;
     font-size: 16px;
     font-weight: bold;
+    &:nth-child(3) {
+      margin-top: 3.5rem;
+    }
   }
-  ${"a"} {
+  a {
     display: block;
     padding: 0.5rem 2rem;
     margin-bottom: 0.1rem;
@@ -101,6 +113,30 @@ const Wrap = styled.div`
     color: #011126;
     background-color: #fcbda3;
     font-weight: bold;
+  }
+  .empty {
+    padding: 0.5rem 2rem;
+    color: #bebebe;
+    border: 1px dashed #bebebe;
+    border-radius: 5px;
+    text-align: center;
+  }
+  &::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 10px;
+    background-color: rgb(190, 190, 190, 0.5);
+    background-clip: content-box;
+    -webkit-background-clip: content-box;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(190, 190, 190, 0.8);
+    background-clip: border-box;
+    -webkit-background-clip: border-box;
+  }
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: transparent;
   }
 `;
 const IconStyle = styled.span`
