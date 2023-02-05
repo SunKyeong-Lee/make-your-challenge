@@ -26,8 +26,12 @@ const DeleteChallenge = () => {
       ...state.currentUser,
       challengeList: newChallengeList,
     });
-    const itemlist1 = newChallengeList.filter((item) => item.challengeState === 1);
-    const itemlist2 = newChallengeList.filter((item) => item.challengeState === 0);
+    const itemlist1 = newChallengeList.filter(
+      (item) => item.challengeState === 1
+    );
+    const itemlist2 = newChallengeList.filter(
+      (item) => item.challengeState === 0
+    );
     if (itemlist1.length > 0) {
       navigator("/board/" + itemlist1[0].challengeId);
     } else if (itemlist2.length > 0) {
@@ -46,22 +50,47 @@ const DeleteChallenge = () => {
       </button>
 
       <ModalStyle show={show} onHide={handleClose} centered>
-        <Modal.Header closeButton />
-        <Modal.Body>
-          <span>{challengeTitle == undefined ? "" : challengeTitle.title}</span> 챌린지를 삭제할까요?
-        </Modal.Body>
-        <Modal.Footer>
-          <MyButton color={"#bebebe"} hover={"#9e9e9e"} onClick={handleClose}>
-            취소
-          </MyButton>
-          <MyButton
-            color={"#fcbda3"}
-            hover={"#f0884e"}
-            onClick={deleteChallenge}
-          >
-            삭제
-          </MyButton>
-        </Modal.Footer>
+        {state.currentUser.challengeList.length > 0 ? (
+          <>
+            <Modal.Body>
+              <p>
+                <span>{challengeTitle?.title}</span> 챌린지를 삭제할까요?
+              </p>
+              <p>삭제된 챌린지는 복구할 수 없어요.</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <MyButton
+                color={"#bebebe"}
+                hover={"#9e9e9e"}
+                onClick={handleClose}
+              >
+                취소
+              </MyButton>
+              <MyButton
+                color={"#fcbda3"}
+                hover={"#f0884e"}
+                onClick={deleteChallenge}
+              >
+                삭제
+              </MyButton>
+            </Modal.Footer>
+          </>
+        ) : (
+          <>
+            <Modal.Body>
+              선택된 챌린지가 없어요! 삭제할 챌린지를 선택해주세요.
+            </Modal.Body>
+            <Modal.Footer>
+              <MyButton
+                color={"#fcbda3"}
+                hover={"#f0884e"}
+                onClick={handleClose}
+              >
+                확인
+              </MyButton>
+            </Modal.Footer>
+          </>
+        )}
       </ModalStyle>
     </div>
   );
@@ -75,16 +104,24 @@ const MyButton = styled.button`
   }
 `;
 const ModalStyle = styled(Modal)`
-  ${"div"} {
+  div {
     border: none;
-    &.modal-body {
-      font-size: 23px;
+    .modal-body {
+      font-size: 20px;
       word-break: keep-all;
+      margin: 1rem 0;
     }
   }
-  ${"span"} {
+  span {
     padding: 0 0.3rem;
     box-shadow: 0 -8px 0 0 #fce5bc inset;
+  }
+  p {
+    margin: 0;
+    &:last-child {
+      font-size: 16px;
+      margin-top: 0.5rem;
+    }
   }
 `;
 

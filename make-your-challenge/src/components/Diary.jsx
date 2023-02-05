@@ -16,35 +16,31 @@ const Diary = (props) => {
     setContent(e.target.value);
   };
 
-  const getDate = () => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const date = String(today.getDate() + 1).padStart(2, "0");
-    return `${year}. ${month}. ${date}`;
-  };
-
   const addDiary = () => {
-    if (content == "") {
-      return state;
+    if (content.trim() == "") {
+      alert("내용을 입력해주세요!");
+      return;
     }
     // 같은 diaryId가 있다면 아래에서 수정하라고 주의문 주기
-    const newDiary = challengeItem.diary.concat({
-      diaryId: challengeItem.stamp.length,
-      date: getDate(),
-      diaryContent: content,
-    });
-    const findIndex = state.currentUser.challengeList.findIndex(
-      (n) => n.challengeId == challengeItem.challengeId
-    );
-    const copyChallengeList = state.currentUser.challengeList;
-    if (findIndex != -1) {
-      copyChallengeList[findIndex] = {
-        ...copyChallengeList[findIndex],
-        diary: newDiary,
-      };
-    }
-    action.setCurrentUser({ ...state.currentUser, challengeList: copyChallengeList });
+    // const newDiary = challengeItem.diary.concat({
+    //   diaryId: challen geItem.stamp.length,
+    //   diaryContent: content,
+    // });
+    // const findIndex = state.currentUser.challengeList.findIndex(
+    //   (n) => n.challengeId == challengeItem.challengeId
+    // );
+    // const copyChallengeList = state.currentUser.challengeList;
+    // if (findIndex != -1) {
+    //   copyChallengeList[findIndex] = {
+    //     ...copyChallengeList[findIndex],
+    //     diary: newDiary,
+    //   };
+    // }
+    // action.setCurrentUser({
+    //   ...state.currentUser,
+    //   challengeList: copyChallengeList,
+    // });
+    setContent("");
     textRef.current.style.height = "auto";
     textRef.current.value = "";
     // 텍스트에리아 작성값이 남아있음 수정필요
@@ -52,20 +48,23 @@ const Diary = (props) => {
 
   const deleteDiary = (item) => {
     // 삭제 확인 문구 추가
-    const newDiary = challengeItem.diary.filter(
-      (n) => n.diaryId != item.diaryId
-    );
-    const findIndex = state.currentUser.challengeList.findIndex(
-      (n) => n.challengeId == challengeItem.challengeId
-    );
-    const copyChallengeList = state.currentUser.challengeList;
-    if (findIndex != -1) {
-      copyChallengeList[findIndex] = {
-        ...copyChallengeList[findIndex],
-        diary: newDiary,
-      };
-    }
-    action.setCurrentUser({ ...state.currentUser, challengeList: copyChallengeList });
+    // const newDiary = challengeItem.diary.filter(
+    //   (n) => n.diaryId != item.diaryId
+    // );
+    // const findIndex = state.currentUser.challengeList.findIndex(
+    //   (n) => n.challengeId == challengeItem.challengeId
+    // );
+    // const copyChallengeList = state.currentUser.challengeList;
+    // if (findIndex != -1) {
+    //   copyChallengeList[findIndex] = {
+    //     ...copyChallengeList[findIndex],
+    //     diary: newDiary,
+    //   };
+    // }
+    // action.setCurrentUser({
+    //   ...state.currentUser,
+    //   challengeList: copyChallengeList,
+    // });
   };
 
   return (
@@ -77,24 +76,27 @@ const Diary = (props) => {
         ref={textRef}
       />
       <MyButton onClick={addDiary}>작성 완료</MyButton>
-      {challengeItem.diary.map((item) => (
-        <DairyWarp>
-          <Head>
-            <Color color={challengeItem.stamp[item.diaryId - 1]}></Color>
-            <div>
-              {item.diaryId}일차 - {item.date}
-            </div>
-            <div
-              onClick={() => {
-                deleteDiary(item);
-              }}
-            >
-              <FontAwesomeIcon icon={faTrash} />
-            </div>
-          </Head>
-          <Body>{item.diaryContent.split("\n").map((line) => {return (<span>{line}<br /></span>);})}</Body>
-        </DairyWarp>
-      ))}
+      {challengeItem.stamp
+        .slice(0)
+        .reverse()
+        .map((item) => (
+          <DairyContainer key={item.day}>
+            <Head>
+              <Color color={item.color} />
+              <div>
+                Day {item.day} :: {item.date}
+              </div>
+              <div
+                onClick={() => {
+                  deleteDiary(item);
+                }}
+              >
+                <FontAwesomeIcon icon={faTrash} />
+              </div>
+            </Head>
+            <Body>{item.diary}</Body>
+          </DairyContainer>
+        ))}
     </Wrap>
   );
 };
@@ -104,7 +106,9 @@ const Wrap = styled.div`
   min-height: 632px;
   box-sizing: border-box;
   overflow-y: auto;
-  ${"textarea"} {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  textarea {
     display: block;
     padding: 1.5rem 1.2rem;
     margin: 1.5rem 1rem 1rem 1rem;
@@ -122,6 +126,28 @@ const Wrap = styled.div`
       outline: 1px solid #bebebe;
     }
   }
+  &::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 10px;
+    background-color: #bebebe;
+    background-clip: content-box;
+    -webkit-background-clip: content-box;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #bebebe;
+    background-clip: border-box;
+    -webkit-background-clip: border-box;
+  }
+  &::-webkit-scrollbar-track:hover {
+    background-color: rgb(190, 190, 190, 0.3);
+    box-shadow: inset 0px 0px 5px rgb(190, 190, 190, 0.7);
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: transparent;
+  }
 `;
 const MyButton = styled.button`
   height: auto;
@@ -136,7 +162,7 @@ const MyButton = styled.button`
     font-weight: bold;
   }
 `;
-const DairyWarp = styled.div`
+const DairyContainer = styled.div`
   clear: both;
   padding: 0 1.2rem;
   margin: 0.5rem 0;

@@ -11,25 +11,31 @@ const StampSelect = (props) => {
 
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
+  const getDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const date = String(today.getDate() + 1).padStart(2, "0");
+    return `${year}. ${month}. ${date}`;
+  };
 
-  /* user.challengeList에서 해당 challengeItem을 찾아 stamp 값 바꾸기 */
   const select = () => {
-    // stamp 새 배열을 만들기 위함
-    const newUserStamp = challengeItem.stamp.concat(selectColor);
-    // 도장판을 모두 채우면 챌린지 진행 상태 변경을 위함
-    const newChallengeState = newUserStamp.length == 30 ? 0 : 1;
-    const findIndex = state.currentUser.challengeList.findIndex(
-      (el) => el.challengeId == challengeItem.challengeId
-    );
-    const copyChallengeList = state.currentUser.challengeList;
-    if (findIndex != -1) {
-      copyChallengeList[findIndex] = {
-        ...copyChallengeList[findIndex],
-        challengeState: newChallengeState,
-        stamp: newUserStamp,
-      };
-    }
-    action.setCurrentUser({ ...state.currentUser, challengeList: copyChallengeList });
+    const newStamp = challengeItem.stamp.concat({
+      day: challengeItem.stamp.length + 1,
+      data: getDate(),
+      color: selectColor,
+    });
+    const newChallengeList = state.currentUser.challengeList.map((item) => {
+      if (item.challengeId === challengeItem.challengeId) {
+        return { ...item, stamp: newStamp };
+      } else {
+        return item;
+      }
+    });
+    action.setCurrentUser({
+      ...state.currentUser,
+      challengeList: newChallengeList,
+    });
     handleClose();
   };
 

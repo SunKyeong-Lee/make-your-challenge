@@ -11,7 +11,7 @@ const Layout = () => {
   useEffect(() => {
     if (state.currentUser.challengeList.length > 0) {
       const item = state.currentUser.challengeList.filter(
-        (item) => item.challengeState === 1
+        (item) => item.stamp.length < 30
       );
       navigator("/board/" + item[0].challengeId);
     }

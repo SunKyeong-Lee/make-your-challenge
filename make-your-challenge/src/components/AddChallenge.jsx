@@ -26,7 +26,7 @@ const AddChallenge = () => {
       return;
     }
     const newChallengeList = state.currentUser.challengeList.concat({
-      challengeId: state.currentUser.challengeCount + 1,
+      challengeId: state.currentUser.challengeCount,
       challengeState: 1,
       title: title,
       stamp: [],
@@ -39,7 +39,7 @@ const AddChallenge = () => {
       challengeCount: state.currentUser.challengeCount + 1,
     });
     setShow(false);
-    navigator("/board/" + (state.currentUser.challengeCount + 1));
+    navigator("/board/" + (state.currentUser.challengeCount));
   };
 
   return (

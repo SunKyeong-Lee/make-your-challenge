@@ -47,8 +47,7 @@ function Sidebar() {
 
 const Wrap = styled(Stack)`
   padding: 3.5rem 2.5rem;
-  height: 100vh;
-  min-height: 800px;
+  min-height: 100vh;
   background-color: #f6f1eb;
   text-align: left;
   .line {

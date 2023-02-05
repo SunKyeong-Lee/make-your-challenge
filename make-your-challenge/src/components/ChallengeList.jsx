@@ -26,7 +26,7 @@ const ChallengeList = () => {
         <div>
           {state.currentUser.challengeList.map(
             (item) =>
-              item.challengeState === 1 && (
+              item.stamp.length < 30 && (
                 <li key={item.challengeId}>
                   <NavLink to={"/board/" + item.challengeId}>
                     {item.title}
@@ -51,7 +51,7 @@ const ChallengeList = () => {
         <div>
           {state.currentUser.challengeList.map(
             (item) =>
-              item.challengeState === 0 && (
+              item.stamp.length === 30 && (
                 <li key={item.challengeId}>
                   <NavLink to={"/board/" + item.challengeId}>
                     {item.title}
@@ -71,8 +71,8 @@ const Wrap = styled.div`
   overflow-x: hidden;
   word-break: break-all;
   h2 {
-    display: flex;
     width: 100%;
+    display: flex;
     font-size: 16px;
     font-weight: bold;
     &:nth-child(3) {

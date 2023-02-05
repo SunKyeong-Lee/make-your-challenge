@@ -1,15 +1,17 @@
 import Container from "react-bootstrap/Container";
 import styled from "styled-components";
 import StampSelect from "./StampSelect";
-import { useState } from "react";
 
 const StampBoard = (props) => {
   const { challengeItem } = props; // challengeList: {...}
 
-  const [today, setToday] = useState(new Date());
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, "0");
-  const date = String(today.getDate() + 1).padStart(2, "0");
+  const getDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const date = String(today.getDate() + 1).padStart(2, "0");
+    return `${year}. ${month}. ${date}`;
+  };
 
   const emptyBoard = [];
   for (let i = challengeItem.stamp.length + 1; i < 30; i++) {
@@ -20,17 +22,15 @@ const StampBoard = (props) => {
     <MyContainer>
       <div className="date">
         <div>Today,</div>
-        <div>
-          {year}. {month}. {date}
-        </div>
+        <div>{getDate()}</div>
       </div>
       <h2>{challengeItem.title}</h2>
       <Board>
-        {challengeItem.stamp.map((color, index) => (
+        {challengeItem.stamp.map((el) => (
           <FillStamp
-            key={index}
-            color={color}
-            className={index == challengeItem.stamp.length - 1 && "stamp-fill"}
+            key={el.day}
+            color={el.color}
+            className={el.day === challengeItem.stamp.length && "stamp-fill"}
           />
         ))}
         {challengeItem.stamp.length < 30 && (
@@ -40,7 +40,11 @@ const StampBoard = (props) => {
           <EmptyStamp key={index}>{num + 1}</EmptyStamp>
         ))}
       </Board>
-      <div>* 차례가 된 숫자를 클릭하면 스티커를 붙일 수 있어요!</div>
+      <div>
+        * 차례가 된 숫자를 클릭하면 스티커를 붙일 수 있어요!
+        <br />
+        * 한 번 붙인 스티커는 제거하거나 바꿀 수 없어요!
+      </div>
     </MyContainer>
   );
 };

@@ -24,23 +24,24 @@ const Memo = (props) => {
       textRef.current.value = "";
       textRef.current.style.height = "auto";
       setShow(false);
-      return state;
+      return;
     }
     const newMemo = challengeItem.memo.concat({
-      memoId: ++state.currentUser.memoCount,
+      memoId: state.currentUser.memoCount,
       text: e.target.value,
     });
-    const findIndex = state.currentUser.challengeList.findIndex(
-      (el) => el.challengeId == challengeItem.challengeId
-    );
-    const copyChallengeList = state.currentUser.challengeList;
-    if (findIndex != -1) {
-      copyChallengeList[findIndex] = {
-        ...copyChallengeList[findIndex],
-        memo: newMemo,
-      };
-    }
-    action.setCurrentUser({ ...state.currentUser, challengeList: copyChallengeList });
+    const newChallengeList = state.currentUser.challengeList.map((item) => {
+      if (item.challengeId === challengeItem.challengeId) {
+        return { ...item, memo: newMemo };
+      } else {
+        return item;
+      }
+    });
+    action.setCurrentUser({
+      ...state.currentUser,
+      challengeList: newChallengeList,
+      memoCount: state.currentUser.memoCount + 1,
+    });
     setShow(false);
     textRef.current.value = "";
     textRef.current.style.height = "auto";
@@ -50,17 +51,17 @@ const Memo = (props) => {
     const newMemo = challengeItem.memo.filter(
       (item) => item.memoId != memo.memoId
     );
-    const findIndex = state.currentUser.challengeList.findIndex(
-      (n) => n.challengeId == challengeItem.challengeId
-    );
-    const copyChallengeList = state.currentUser.challengeList;
-    if (findIndex != -1) {
-      copyChallengeList[findIndex] = {
-        ...copyChallengeList[findIndex],
-        memo: newMemo,
-      };
-    }
-    action.setCurrentUser({ ...state.currentUser, challengeList: copyChallengeList });
+    const newChallengeList = state.currentUser.challengeList.map((item) => {
+      if (item.challengeId === challengeItem.challengeId) {
+        return { ...item, memo: newMemo };
+      } else {
+        return item;
+      }
+    });
+    action.setCurrentUser({
+      ...state.currentUser,
+      challengeList: newChallengeList,
+    });
   };
 
   return (
@@ -107,7 +108,7 @@ const Wrap = styled.div`
   box-sizing: border-box;
   overflow-y: auto;
   white-space: pre-wrap;
-  ${"textarea"} {
+  textarea {
     width: calc(100% - 32px);
     padding: 1.5rem 1.2rem;
     margin: 1.5rem 1rem 1rem 1rem;
@@ -122,6 +123,23 @@ const Wrap = styled.div`
       min-height: 120px;
     }
   }
+  &::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 10px;
+    background-color: rgb(190, 190, 190, 0.5);
+    background-clip: content-box;
+    -webkit-background-clip: content-box;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(190, 190, 190, 0.8);
+    background-clip: border-box;
+    -webkit-background-clip: border-box;
+  }
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: transparent;
+  }
 `;
 const MemoStyle = styled.div`
   display: flex;
@@ -132,7 +150,7 @@ const MemoStyle = styled.div`
   border-radius: 10px;
   box-shadow: 0 0 10px #eeeeee;
   background-color: #f6f1eb;
-  ${"svg"} {
+  svg {
     color: #bebebe;
     margin-left: auto;
     padding-left: 1rem;
