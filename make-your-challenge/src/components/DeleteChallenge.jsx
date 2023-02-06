@@ -11,7 +11,7 @@ const DeleteChallenge = () => {
   const { id } = useParams(); // id : challengeId(문자열)
   const [show, setShow] = useState(false);
   const navigator = useNavigate();
-  const challengeTitle = state.currentUser.challengeList.find(
+  const findChallenge = state.currentUser.challengeList.find(
     (item) => item.challengeId == id
   );
 
@@ -54,9 +54,9 @@ const DeleteChallenge = () => {
           <>
             <Modal.Body>
               <p>
-                <span>{challengeTitle?.title}</span> 챌린지를 삭제할까요?
+                <span>{findChallenge?.title}</span> 챌린지를 삭제할까요?
               </p>
-              <p>삭제된 챌린지는 복구할 수 없어요.</p>
+              <p>! 삭제된 챌린지는 복구할 수 없어요.</p>
             </Modal.Body>
             <Modal.Footer>
               <MyButton
@@ -119,8 +119,10 @@ const ModalStyle = styled(Modal)`
   p {
     margin: 0;
     &:last-child {
+      color: #f0884e;
       font-size: 16px;
       margin-top: 0.5rem;
+      padding-left:0.3rem;
     }
   }
 `;

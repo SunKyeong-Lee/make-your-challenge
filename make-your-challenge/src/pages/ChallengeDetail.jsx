@@ -14,7 +14,13 @@ const ChallengeDetail = () => {
     (n) => n.challengeId === parseInt(id)
   );
 
-  const tabAction = () => setTab([!tab[0], !tab[1]]);
+  const tabAction = (num) => {
+    if (!tab[num]) {
+      setTab(
+        tab.map((el, index) => (num === index && !el))
+      );
+    }
+  };
 
   return (
     <Wrap>
@@ -22,14 +28,18 @@ const ChallengeDetail = () => {
 
       <TabWrap>
         <MyButton
-          onClick={tabAction}
+          onClick={() => {
+            tabAction(0);
+          }}
           className={tab[0] ? undefined : "inactive"}
         >
           <div className={tab[0] ? "active" : undefined} />
           Memo
         </MyButton>
         <MyButton
-          onClick={tabAction}
+          onClick={() => {
+            tabAction(1);
+          }}
           className={tab[1] ? undefined : "inactive"}
         >
           <div className={tab[1] ? "active" : undefined} />
@@ -62,7 +72,7 @@ const Wrap = styled.div`
 const TabWrap = styled.div`
   min-width: 480px;
   padding: 3.5rem 2.5rem;
-  box-shadow: #eeeeee 1px 0 30px;
+  box-shadow: -20px 0 30px #eeeeee;
 `;
 const MyTab = styled.div`
   &.hidden {

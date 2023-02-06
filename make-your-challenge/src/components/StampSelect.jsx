@@ -22,7 +22,7 @@ const StampSelect = (props) => {
   const select = () => {
     const newStamp = challengeItem.stamp.concat({
       day: challengeItem.stamp.length + 1,
-      data: getDate(),
+      date: getDate(),
       color: selectColor,
     });
     const newChallengeList = state.currentUser.challengeList.map((item) => {

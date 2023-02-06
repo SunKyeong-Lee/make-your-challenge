@@ -27,7 +27,6 @@ const AddChallenge = () => {
     }
     const newChallengeList = state.currentUser.challengeList.concat({
       challengeId: state.currentUser.challengeCount,
-      challengeState: 1,
       title: title,
       stamp: [],
       memo: [],

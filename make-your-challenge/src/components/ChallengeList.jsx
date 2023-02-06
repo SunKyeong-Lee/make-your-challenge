@@ -69,7 +69,6 @@ const Wrap = styled.div`
   height: 60%;
   overflow-y: auto;
   overflow-x: hidden;
-  word-break: break-all;
   h2 {
     width: 100%;
     display: flex;

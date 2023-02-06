@@ -62,7 +62,7 @@ const DataProvider = ({ children }) => {
               day: 13,
               date: "20223. 01. 27",
               color: "#F29544",
-              diary: "일정있다고 넘 뜸하게 한 거 같다. 꾸준히 하자 나",
+              diary: "요즘 넘 뜸하게 한 거 같다. 꾸준히 하자 나",
             },
           ],
           memo: [
