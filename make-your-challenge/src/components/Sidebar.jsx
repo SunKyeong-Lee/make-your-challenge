@@ -15,16 +15,18 @@ function Sidebar() {
   const navigater = useNavigate();
 
   const logout = () => {
-    const newUserList = state.user.map((user) => {
-      if (user.userId === state.currentUser.userId) {
-        return state.currentUser;
-      } else {
-        return user;
-      }
-    });
-    action.setUser(newUserList);
+    // const newUserList = state.user.map((el) => {
+    //   if (el.userId === state.currentUser.userId) {
+    //     // copy 수정
+    //     return state.currentUser;
+    //   } else {
+    //     return el;
+    //   }
+    // });
+    // action.setUser(newUserList);
     window.sessionStorage.clear();
     navigater("/");
+    // console.log(staet.user)
   };
 
   return (

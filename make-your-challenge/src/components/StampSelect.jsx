@@ -19,7 +19,7 @@ const StampSelect = (props) => {
     return `${year}. ${month}. ${date}`;
   };
 
-  const select = () => {
+  const selectStamp = () => {
     const newStamp = challengeItem.stamp.concat({
       day: challengeItem.stamp.length + 1,
       date: getDate(),
@@ -67,7 +67,7 @@ const StampSelect = (props) => {
           <MyButton color={"#bebebe"} hover={"#9e9e9e"} onClick={handleClose}>
             취소
           </MyButton>
-          <MyButton color={"#fcbda3"} hover={"#f0884e"} onClick={select}>
+          <MyButton color={"#fcbda3"} hover={"#f0884e"} onClick={selectStamp}>
             선택하기
           </MyButton>
         </Modal.Footer>

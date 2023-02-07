@@ -27,10 +27,10 @@ const DeleteChallenge = () => {
       challengeList: newChallengeList,
     });
     const itemlist1 = newChallengeList.filter(
-      (item) => item.challengeState === 1
+      (item) => item.stamp.length < 30
     );
     const itemlist2 = newChallengeList.filter(
-      (item) => item.challengeState === 0
+      (item) => item.stamp.length === 30
     );
     if (itemlist1.length > 0) {
       navigator("/board/" + itemlist1[0].challengeId);

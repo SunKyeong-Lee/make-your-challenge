@@ -30,7 +30,6 @@ const AddChallenge = () => {
       title: title,
       stamp: [],
       memo: [],
-      diary: [],
     });
     action.setCurrentUser({
       ...state.currentUser,

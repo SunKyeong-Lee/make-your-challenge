@@ -42,7 +42,7 @@ const DataProvider = ({ children }) => {
               day: 8,
               date: "2023. 01. 10",
               color: "#F4CAB2",
-              diary: "귀찮다고 어제 스트레칭 빼먹어서 그런지 몸이 조금 뻐근한 거 같다. \n스트레칭 잘 해야지...",
+              diary: "스트레칭을 빼먹지 말자...",
             },
             {
               day: 9,
